@@ -1,0 +1,51 @@
+{% load static %}
+<div>
+    <form method="post" action="">
+        {% csrf_token %}
+          <fieldset>
+          <legend>Contact Details</legend>
+
+          <div>
+            {{ formset.management_form }}
+          <!--   {% for dict in formset.errors %}
+                {% for error in dict.values %}
+                    {{ error }}
+                {% endfor %}
+            {% endfor %} -->
+            {% for form in formset %}
+            
+              <div class="link-formset">
+              <p><label for="id_form-0-title">this is title label:</label> <textarea name="form-0-title" cols="40" rows="10" id="id_form-0-title">
+
+
+            </textarea></p>
+              {{ form.title.errors }}
+            
+            <p><label for="id_form-0-slug">This is slug:</label> <input type="text" name="form-0-slug" maxlength="50" id="id_form-0-slug"></p>
+            {{ form.slug.errors }}
+            <p><label for="id_form-0-image">Image:</label> <input type="file" name="form-0-image" id="id_form-0-image"></p>
+            </div>
+            
+            </div>
+            {% endfor %}
+
+          
+          <div class='btn-group'>
+            <input class='btn btn-primary' type='submit' value='Save' /> 
+           </div>     
+
+        </fieldset>
+</form>
+</div>
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="{% static 'js/formset.js' %}"></script>        
+ <script>
+    $('.link-formset').formset({
+        addText: 'Add Contact',
+        deleteText: 'Remove Contact'
+    });
+</script>
